@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>{{ page.title }}</title>
+
+    <meta name="description" content="{{ page.description }}">
+    <meta name="author" content="{{ page.author }}">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/odi.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/css/highlight/railscasts.css">
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="reveal.js/css/print/pdf.css" type="text/css" media="print">
+
+</head>
+
+<body>
+
+<div class="reveal">
+
+    
+    <img id="odi-circles" class="brand" style="position:fixed; right:-280px; top:-180px; z-index:-30; display: none;" src="brand/odi-colour-circles.png" alt="ODI">
+    <img id="odi-polygons" class="brand" style="position:fixed; right:-280px; top:-180px; z-index:-30; display: none;" src="brand/odi-colour-polygons.png" alt="ODI">
+    <img id="odi-dynamic" class="brand" style="position:fixed; right:-220px; top:-230px; z-index:-30; display: none;" src="brand/odi_dynamic_logo.png" alt="ODI">
+    <img id="odi-okf" class="brand" style="position:fixed; right:-20px; top:-20px; z-index:-30; display: none;" src="brand/okf.png" alt="ODI">
+
+    <div class="slides" style="margin-left: 20px;">
+
+        {{ content }}
+
+    </div>
+
+    <div id="brand">
+        <a class="image" href="http://theodi.org"><img height="40"
+                                                       style="position:fixed; left:20px; bottom:20px; z-index:30;"
+                                                       src="brand/odi_logo.svg" alt="ODI"></a>
+        <a class="image" href="http://creativecommons.org/licenses/by-sa/3.0/"><img width="97" height="34"
+                                                                                    style="position:fixed; right:20px; bottom:20px; z-index:30;"
+                                                                                    src="brand/licence.png"
+                                                                                    alt="Creative Commons"></a>
+    </div>
+</div>
+
+<script src="reveal.js/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script>
+
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: false,
+	//width: $(window).width(),
+	//height: $(window).height(),
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        dependencies: [
+            { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            } }                  ,
+            { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        ]
+    });
+
+function hideAll(excepts) {
+    	nodes = document.getElementsByClassName("brand");
+	for (i=0;i<nodes.length;i++) {
+		keep = 0;
+		node = nodes[i].getAttribute("id");
+		for (j=0;j<excepts.length;j++) {
+			except = excepts[j];
+			if (node == except) {
+				keep = 1;
+			}
+		}
+		if (keep < 1) {
+			$('#'+node).fadeOut();
+		}
+	}
+	footer = 1;
+	for (j=0;j<excepts.length;j++) {
+		except = excepts[j];
+		if (except == "no-footer") {
+			footer = 0;
+		}
+	}
+	if (footer > 0) {
+		$('#brand').fadeIn();
+	}
+}
+
+function hideFooter() {
+	$('#brand').fadeOut();
+}
+
+function showBrand() {
+	states = [];
+	lnodes = document.getElementsByClassName("present");
+	for (i=0;i<lnodes.length;i++) {
+		lstates = lnodes[i].getAttribute("data-state");
+		if (lstates) {
+			states = states.concat(lstates.split(" "));
+			
+		}
+	}
+	if (states.length > 0) {
+		processBrand(states);
+	} else {
+		hideAll("");
+	}
+}
+
+function processBrand(states) {
+	hideAll(states);
+	for (i=0;i<states.length;i++) {
+		lnode = states[i];
+		if (lnode && lnode!="no-footer") {
+			$('#'+lnode).fadeIn();
+		} 
+		if (lnode == "no-footer") {
+			hideFooter();
+		}
+	}
+}
+
+$(document).keydown(function(e) {
+	showBrand();
+});
+
+$( document ).ready(function() {
+	showBrand();
+});
+
+</script>
+
+
+</body>
+</html>
