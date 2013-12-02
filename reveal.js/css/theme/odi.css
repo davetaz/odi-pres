@@ -63,6 +63,10 @@ html.odi-green .state-background {
   background-color: #0cbc38;
   z-index: -40;
 }
+html.odi-purple .state-background {
+  background-color: #ab2a86;
+  z-index: -40;
+}
 
 em {
   color: #00b4af;
