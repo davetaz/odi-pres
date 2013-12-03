@@ -13,6 +13,10 @@
  * ODI-specific classes
  **********************/
 
+section {
+	height: 100%;
+}
+
 section.logo-background {
   width: 100%;
   height: 90%;
@@ -84,11 +88,16 @@ impact {
    font-family: "Helvetica Neue", "Helvetica", sans-serif;
    font-size: 90px;
    line-height: 1.2;
-   position: relative;
-   bottom: -360px;
+   position: fixed;
+   bottom: 200px;
    display: block;
    width: 90%;
-   right: -20px;
+}
+impact smallest {
+   font-size: 32px;
+   display: inline-block;
+   line-height: 1.2em;
+   vertical-align: top;
 }
 
 figure img {
@@ -106,6 +115,34 @@ p.odi-poly-block {
    margin-top: 100px; 
    font-size: 60px; 
    line-height: 1.8;
+}
+
+ul.no-bullet {
+   list-style-type: none;
+}
+
+ul.shortlist {
+   font-size: 32px;
+   line-height: 1.4em;
+}
+ul.shortlist li {
+   margin-top: 1.2em;
+}
+
+.strikeout {
+    position: relative;
+}
+.strikeout::after {
+    border-bottom: 8px solid black;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+iframe {
+	width: 100%;
+	height: 700px;
 }
 
 /*********************************************
