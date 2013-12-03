@@ -143,15 +143,14 @@ function processBrand(states) {
 }
 
 function maxHeightSection(section){
-	//console.log(section);
 	lclasses = section.getAttribute("class");
 	if (parseInt(lclasses.indexOf("center")) < 0) {
-		section.style.height="100%";
+		section.style.height="95%";
 	}
 }
 
-function maxHeightSections(root) {
-	lnodes = root.getElementsByTagName("section");
+function maxHeightSections() {
+	lnodes = document.getElementsByClassName("present");
 	for (i=0;i<lnodes.length;i++) {
 		maxHeightSection(lnodes[i]);
 	}
@@ -159,12 +158,12 @@ function maxHeightSections(root) {
 
 $(document).keydown(function(e) {
 	showBrand();
-	maxHeightSections(document);
+	maxHeightSections();
 });
 
 $( document ).ready(function() {
 	showBrand();
-	maxHeightSections(document);
+	maxHeightSections();
 });
 
 </script>
