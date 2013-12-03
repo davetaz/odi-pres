@@ -1045,8 +1045,6 @@ var Reveal = (function(){
 						slide.style.top = 0;
 					}
 					else {
-						console.log("In here");
-						console.log(slideHeight);
 						slide.style.top = ( - ( getAbsoluteHeight( slide ) / 2 ) - slidePadding) + 'px';
 //						slide.style.top = Math.max( - ( getAbsoluteHeight( slide ) / 2 ) - slidePadding, -slideHeight / 2 ) + 'px';
 					}

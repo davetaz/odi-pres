@@ -142,12 +142,28 @@ function processBrand(states) {
 	}
 }
 
+function maxHeightSection(section){
+	//console.log(section);
+	lclasses = section.getAttribute("class");
+	if (parseInt(lclasses.indexOf("center")) < 0) {
+		section.style.height="100%";
+	}
+}
+
+function maxHeightSections(root) {
+	lnodes = root.getElementsByTagName("section");
+	for (i=0;i<lnodes.length;i++) {
+		maxHeightSection(lnodes[i]);
+	}
+}
+
 $(document).keydown(function(e) {
 	showBrand();
 });
 
 $( document ).ready(function() {
 	showBrand();
+	maxHeightSections(document);
 });
 
 </script>
